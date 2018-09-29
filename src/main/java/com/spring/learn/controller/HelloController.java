@@ -8,6 +8,8 @@ import com.spring.learn.model.SysLog;
 import com.spring.learn.model.User;
 import com.spring.learn.util.Log;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/index")
 public class HelloController {
-
+    protected static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     @Autowired
     private Blog blog;
     @Autowired(required = false)
@@ -44,8 +46,9 @@ public class HelloController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createUser(@RequestParam(required = true) String name) {
+        logger.info("start to add {}", name);
         User user = new User();
-        user.setId("1");
+        user.setId("2");
         user.setUsername("yupaopao");
         userDao.createUser(user);
         return "success";
