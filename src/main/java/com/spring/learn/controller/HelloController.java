@@ -1,9 +1,13 @@
 package com.spring.learn.controller;
 
 
+import com.spring.learn.Dao.LogMapper;
 import com.spring.learn.Dao.UserMapper;
 import com.spring.learn.model.Blog;
+import com.spring.learn.model.SysLog;
 import com.spring.learn.model.User;
+import com.spring.learn.util.Log;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,15 +29,17 @@ public class HelloController {
     private Blog blog;
     @Autowired(required = false)
     private UserMapper userDao;
+    @Autowired
+    private LogMapper logMapper;
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
         System.out.print("say hello to " + name);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    @Log
     public String index() {
-        List<User> list = userDao.findAllUser();
-        return list.toString();
+        return "success";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
