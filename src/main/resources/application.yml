@@ -1,4 +1,6 @@
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -53,6 +55,13 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: tk.mapper.model
 logging:
-  path: F:\\
-  file: demo.log
+  path: E:\\demo
+  file: log\sp.log
+  level:
+    com:
+      spring:
+        learn:
+          Dao: debug
+
+
 

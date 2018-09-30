@@ -11,11 +11,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class HelloController {
     private Blog blog;
     @Autowired(required = false)
     private UserMapper userDao;
-    @Autowired
+    @Autowired(required = false)
     private LogMapper logMapper;
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
@@ -39,8 +41,9 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @Log
     public String index() {
+        logger.info("query db");
+        userDao.findAllUser();
         return "success";
     }
 
@@ -53,4 +56,5 @@ public class HelloController {
         userDao.createUser(user);
         return "success";
     }
+
 }
