@@ -3,6 +3,7 @@ package com.spring.learn.controller;
 
 import com.spring.learn.Dao.LogMapper;
 import com.spring.learn.Dao.UserMapper;
+import com.spring.learn.impl.UserServiceImpl;
 import com.spring.learn.model.Blog;
 import com.spring.learn.model.SysLog;
 import com.spring.learn.model.User;
@@ -35,6 +36,9 @@ public class HelloController {
     private UserMapper userDao;
     @Autowired(required = false)
     private LogMapper logMapper;
+
+    @Autowired
+    private UserServiceImpl userService;
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
         System.out.print("say hello to " + name);
@@ -43,7 +47,7 @@ public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         logger.info("query db");
-        userDao.findAllUser();
+        userService.findAllUser();
         return "success";
     }
 
@@ -51,9 +55,9 @@ public class HelloController {
     public String createUser(@RequestParam(required = true) String name) {
         logger.info("start to add {}", name);
         User user = new User();
-        user.setId("2");
-        user.setUsername("yupaopao");
-        userDao.createUser(user);
+        user.setId("3");
+        user.setUsername(name);
+        userService.addUser(user);
         return "success";
     }
 
