@@ -17,4 +17,7 @@ public interface UserService {
 
     @Cacheable()
     List<User> findAllUser();
+
+    @Cacheable(key = "#p0")
+    User findUser(String id);
 }
