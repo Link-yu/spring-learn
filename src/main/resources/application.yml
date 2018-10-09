@@ -84,15 +84,9 @@ logging:
           Dao: debug
 server:
   port: 9991
+
 management:
-  security:
-    enabled: false #关掉安全认证
-  server:
-    port: 9991
-    servlet:
-      context-path: /monitor
-endpoints:
-  shutdown:
-    enabled: true
-
-
+  endpoints:
+    web:
+      exposure:
+        include: "*"
