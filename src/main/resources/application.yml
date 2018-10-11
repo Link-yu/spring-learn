@@ -73,7 +73,6 @@ spring:
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
-  typeAliasesPackage: tk.mapper.model
 logging:
   path: E:\\demo
   file: log\sp.log
@@ -84,9 +83,10 @@ logging:
           Dao: debug
 server:
   port: 9991
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  server:
+    port: 9991
