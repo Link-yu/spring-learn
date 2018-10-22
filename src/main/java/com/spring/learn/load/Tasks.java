@@ -13,5 +13,6 @@ public class Tasks {
     @Scheduled(fixedRate = 5000)
     public void print() {
         System.out.println("现在时间:" + date.format(new Date()));
+        System.out.println("nnnn");
     }
 }
