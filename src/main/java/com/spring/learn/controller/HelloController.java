@@ -51,7 +51,7 @@ public class HelloController {
         System.out.print("say hello to " + name);
     }
 
-    @ApiOperation(value = "获取用户列表", notes = "获取用户列表")
+    @ApiOperation(value = "获取用户列咖妃嘎嘎表", notes = "获取用户列表")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         logger.info("query db");
