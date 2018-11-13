@@ -55,6 +55,7 @@ public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         logger.info("query db");
+        System.out.print("dsfaga");
         userService.findAllUser();
         return "success";
     }
