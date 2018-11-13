@@ -65,6 +65,7 @@ public class HelloController {
         logger.info("start to add {}", name);
         User user = new User();
         user.setId("3");
+        System.out.print("dfaga4323444444");
         user.setUsername(name);
         userService.addUser(user);
         return "success";
