@@ -25,13 +25,14 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  *
  * @author yu
  * @date 2016/10/31
  */
-@Api
+//@Api
 @RestController
 @RequestMapping(value = "/index")
 public class HelloController {
@@ -51,34 +52,45 @@ public class HelloController {
         System.out.print("say hello to " + name);
     }
 
-    @ApiOperation(value = "获取用户列咖妃嘎嘎表", notes = "获取用户列的阿发尕尕333表")
+//    @ApiOperation(value = "获取用户列咖妃嘎嘎表", notes = "获取用户列的阿发尕尕333表")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        logger.info("query db");
-        System.out.print("dsfaga");
-        userService.findAllUser();
+//        logger.info("query db");
+//        System.out.print("dsfaga");
+//        userService.findAllUser();
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(1,5,10,TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5));
+        executor.execute(userService);
         return "success";
     }
-    @ApiIgnore
+//    @ApiIgnore
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String createUser(@RequestParam(required = true) String name) {
+    public String createUser(@RequestParam(required = true) String name,
+                             @RequestParam(required = true) String id) {
         logger.info("start to add {}", name);
+        System.out.print(name + "sefge");
         User user = new User();
-        user.setId("3");
+        user.setId(id);
         System.out.print("dfaga4323444444");
         user.setUsername(name);
         userService.addUser(user);
         return "success";
     }
 
-    @ApiOperation(value = "获取用户信息", notes = "根据用户id获取用户信息")
-    @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "String", paramType = "query")
+//    @ApiOperation(value = "获取用户信息", notes = "根据用户id获取用户信息")
+//    @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "String", paramType = "query")
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public String findUser(@RequestParam(required = true) String id) throws Exception {
         logger.info("query user by {}", id);
         User user = userService.findUser(id);
         String s = objectMapper.writeValueAsString(user);
         return s;
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public void delete(@RequestParam(required = true) String id) {
+        userService.delete(id);
+        logger.info("delete user id is {}.", id);
     }
 
 }

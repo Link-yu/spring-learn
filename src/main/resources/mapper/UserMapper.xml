@@ -28,6 +28,9 @@
         values
             (#{id},#{username})
     </insert>
+    <delete id="delete">
+        delete FROM user where `id`=#{id}
+    </delete>
 
 </mapper>
 

@@ -20,4 +20,6 @@ public interface UserService {
 
     @Cacheable(key = "#p0")
     User findUser(String id);
+
+    void delete(String id);
 }

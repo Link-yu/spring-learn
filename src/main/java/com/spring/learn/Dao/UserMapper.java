@@ -12,4 +12,6 @@ public interface UserMapper {
     List<User> findAllUser();
 
     User findUser(String id);
+
+    void delete(String id);
 }

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Runnable {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired(required = false)
     private UserMapper userMapper;
@@ -32,5 +32,24 @@ public class UserServiceImpl implements UserService {
     public User findUser(String id) {
         User user = userMapper.findUser(id);
         return user;
+    }
+
+    @Override
+    public void delete(String id) {
+        userMapper.delete(id);
+    }
+
+
+    @Override
+    public void run() {
+        try {
+            int i = 0;
+            while (true) {
+                System.out.print(i++);
+                Thread.sleep(1000);
+            }
+        } catch (Exception e) {
+
+        }
     }
 }
