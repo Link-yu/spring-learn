@@ -42,7 +42,7 @@ public class SqlInterceptor implements Interceptor {
     @Override
     public Object plugin(Object target) {
         if (target instanceof Executor) {
-            /*StatementHandler类型才执行intercept方法*/
+            /*Executor类型才执行intercept方法*/
             return Plugin.wrap(target,this);
         }
         return target;
