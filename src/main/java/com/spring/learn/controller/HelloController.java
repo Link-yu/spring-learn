@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.learn.Dao.LogMapper;
 import com.spring.learn.Dao.UserMapper;
 import com.spring.learn.impl.UserServiceImpl;
+import com.spring.learn.listener.TestEvent;
 import com.spring.learn.model.Blog;
 import com.spring.learn.model.SysLog;
 import com.spring.learn.model.User;
@@ -16,6 +17,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +51,7 @@ public class HelloController {
     ObjectMapper objectMapper;
     @Autowired
     private UserServiceImpl userService;
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
         System.out.print("say hello to " + name);
@@ -73,7 +78,13 @@ public class HelloController {
         user.setId(id);
         System.out.print("dfaga4323444444");
         user.setUsername(name);
-        userService.addUser(user);
+        try {
+            userService.addUser(user);
+        } catch (Exception e) {
+            logger.info("exception");
+        }
+
+
         return "success";
     }
 

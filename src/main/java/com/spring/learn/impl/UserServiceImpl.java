@@ -1,13 +1,17 @@
 package com.spring.learn.impl;
 
 import com.spring.learn.Dao.UserMapper;
+import com.spring.learn.listener.TestEvent;
 import com.spring.learn.model.User;
 import com.spring.learn.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
@@ -16,9 +20,18 @@ public class UserServiceImpl implements UserService, Runnable {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired(required = false)
     private UserMapper userMapper;
+    @Autowired(required = false)
+    private ApplicationEventPublisher applicationEventPublisher;
     @Override
-    public void addUser(User user) {
+    @Transactional(rollbackFor = Exception.class)
+    public void addUser(User user) throws Exception{
         userMapper.createUser(user);
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+            @Override
+            public void afterCommit() {
+                applicationEventPublisher.publishEvent(new TestEvent(this,"tom","running"));
+            }
+        });
         logger.info("add user {}", user.getUsername());
     }
 

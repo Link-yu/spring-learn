@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserService {
 
     @CachePut(key = "#p0.id")
-    void addUser(User user);
+    void addUser(User user) throws Exception;
 
     @Cacheable()
     List<User> findAllUser();

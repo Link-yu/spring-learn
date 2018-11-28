@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class CustonListener implements ApplicationListener<TestEvent> {
     @Override
     public void onApplicationEvent(TestEvent testEvent) {
-        System.out.println(testEvent.getName() + " " + testEvent.getDoing());
+        System.out.println(testEvent.getName() + " fasdf " + testEvent.getDoing());
     }
 }
