@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,5 +37,6 @@ public class SpringLearnApplicationTests {
         User user = userService.findUser("1");
         Assert.assertEquals("是否是yupaopao", "yupaopao",user.getUsername());
     }
+
 
 }

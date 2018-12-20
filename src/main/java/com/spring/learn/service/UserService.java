@@ -22,4 +22,6 @@ public interface UserService {
     User findUser(String id);
 
     void delete(String id);
+
+    void batchUser();
 }

@@ -64,8 +64,9 @@ public class HelloController {
 //        System.out.print("dsfaga");
 //        userService.findAllUser();
 //        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(1,5,10,TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5));
-        executor.execute(userService);
+//        ThreadPoolExecutor executor = new ThreadPoolExecutor(1,5,10,TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5));
+//        executor.execute(userService);
+//        userService.batchUser();
         return "success";
     }
 //    @ApiIgnore

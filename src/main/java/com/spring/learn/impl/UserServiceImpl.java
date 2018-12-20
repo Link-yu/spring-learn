@@ -52,6 +52,16 @@ public class UserServiceImpl implements UserService, Runnable {
         userMapper.delete(id);
     }
 
+    @Override
+    public void batchUser() {
+        for (int i = 100000; i < 1000000;i++) {
+            User user = new User();
+            user.setId(String.valueOf(i));
+            user.setUsername("杰尔玛:" + i);
+            userMapper.createUser(user);
+        }
+    }
+
 
     @Override
     public void run() {
