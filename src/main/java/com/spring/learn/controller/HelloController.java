@@ -69,7 +69,6 @@ public class HelloController {
 //        userService.batchUser();
         return "success";
     }
-//    @ApiIgnore
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createUser(@RequestParam(required = true) String name,
                              @RequestParam(required = true) String id) {
