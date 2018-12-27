@@ -10,7 +10,7 @@ import java.util.Date;
 public class Tasks {
     private static final SimpleDateFormat date= new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void print() {
 //        System.out.println("现在时间:" + date.format(new Date()));
 //        System.out.println("nnnn");
