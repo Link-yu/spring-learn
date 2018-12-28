@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService, Runnable {
     private UserMapper userMapper;
     @Autowired(required = false)
     private ApplicationEventPublisher applicationEventPublisher;
+    @Autowired(required = false)
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void addUser(User user) throws Exception{
@@ -54,15 +58,20 @@ public class UserServiceImpl implements UserService, Runnable {
 
     @Override
     public void batchUser() {
-        for (int i = 100000; i < 1000000;i++) {
+        threadPoolTaskExecutor.submit(() -> {
+            batch();
+        });
+    }
+
+
+    private void batch() {
+        for (int i = 0; i < 100;i++) {
             User user = new User();
             user.setId(String.valueOf(i));
             user.setUsername("杰尔玛:" + i);
             userMapper.createUser(user);
         }
     }
-
-
     @Override
     public void run() {
         try {

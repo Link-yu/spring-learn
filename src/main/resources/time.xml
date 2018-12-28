@@ -18,6 +18,7 @@
 
 
     <!--<task:annotation-driven />-->
+    <!--<task:executor id="threadPoolTaskExecutor" pool-size="5" queue-capacity="10" rejection-policy="DISCARD_OLDEST"/>-->
     <bean id="myTimer" class="com.spring.learn.timer.TimerScheduler"></bean>
     <task:scheduled-tasks>
         <task:scheduled ref="myTimer" method="printTime" fixed-rate="10000"/>

@@ -10,12 +10,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.spring.learn.config"})
 @EnableConfigurationProperties({Blog.class})
 @EnableCaching
 @EnableScheduling
+@EnableAsync
 @ServletComponentScan
 @ImportResource("classpath:time.xml")
 public class SpringLearnApplication {
