@@ -9,6 +9,7 @@ import com.spring.learn.listener.TestEvent;
 import com.spring.learn.model.Blog;
 import com.spring.learn.model.SysLog;
 import com.spring.learn.model.User;
+import com.spring.learn.service.UserService;
 import com.spring.learn.util.Log;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,6 +18,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -50,7 +52,8 @@ public class HelloController {
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
-    private UserServiceImpl userService;
+    @Qualifier(value = "service2")
+    private UserService userService;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
