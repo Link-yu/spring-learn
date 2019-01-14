@@ -84,11 +84,13 @@ logging:
           Dao: debug
 server:
   port: 9991
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+load.data: route
 #  security:
 #    enabled: false
 #  server:

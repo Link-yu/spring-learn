@@ -1,5 +1,6 @@
 package com.spring.learn;
 
+import com.spring.learn.middle.IdService;
 import com.spring.learn.model.Blog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -25,6 +27,6 @@ public class SpringLearnApplication {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SpringLearnApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
-        app.run(args);
+        ConfigurableApplicationContext run = app.run(args);
     }
 }
