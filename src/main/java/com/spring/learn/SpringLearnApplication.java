@@ -1,5 +1,6 @@
 package com.spring.learn;
 
+import com.spring.learn.config.TestApplicationContextInitializer;
 import com.spring.learn.middle.IdService;
 import com.spring.learn.model.Blog;
 import org.slf4j.Logger;
@@ -21,12 +22,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAsync
 @ServletComponentScan
-@ImportResource("classpath:time.xml")
+@ImportResource({"classpath:time.xml","classpath:provider.xml"})
 public class SpringLearnApplication {
     protected static final Logger logger = LoggerFactory.getLogger(SpringLearnApplication.class);
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SpringLearnApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
+        app.addInitializers(new TestApplicationContextInitializer());
         ConfigurableApplicationContext run = app.run(args);
+        System.out.println("你好吗");
+        System.out.println("你好吗");
     }
 }

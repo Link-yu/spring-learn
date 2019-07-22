@@ -14,8 +14,8 @@ import com.spring.learn.util.Log;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +42,7 @@ import java.util.concurrent.*;
 @RestController
 @RequestMapping(value = "/index")
 public class HelloController {
-    protected static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+    protected static final Logger logger = Logger.getLogger(HelloController.class);
     @Autowired
     private Blog blog;
     @Autowired(required = false)
@@ -52,7 +52,6 @@ public class HelloController {
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
-    @Qualifier(value = "service2")
     private UserService userService;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -75,7 +74,7 @@ public class HelloController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createUser(@RequestParam(required = true) String name,
                              @RequestParam(required = true) String id) {
-        logger.info("start to add {}", name);
+        logger.info("start to add {}");
         System.out.print(name + "sefge");
         User user = new User();
         user.setId(id);
@@ -95,8 +94,8 @@ public class HelloController {
 //    @ApiImplicitParam(name = "id", value = "用户id",required = true, dataType = "String", paramType = "query")
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public String findUser(@RequestParam(required = true) String id) throws Exception {
-        logger.info("query user by {}", id);
-        User user = userService.findUser(id);
+//        logger.info("query user by {}", id);
+            User user = userService.findUser(id);
         String s = objectMapper.writeValueAsString(user);
         return s;
     }
@@ -104,7 +103,7 @@ public class HelloController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public void delete(@RequestParam(required = true) String id) {
         userService.delete(id);
-        logger.info("delete user id is {}.", id);
+//        logger.info("delete user id is {}.", id);
     }
 
 }

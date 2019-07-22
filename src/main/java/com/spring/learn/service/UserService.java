@@ -18,7 +18,7 @@ public interface UserService {
     @Cacheable()
     List<User> findAllUser();
 
-    @Cacheable(key = "#p0")
+//    @Cacheable(key = "#p0")
     User findUser(String id);
 
     void delete(String id);

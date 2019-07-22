@@ -2,7 +2,6 @@ package com.spring.learn.Dao;
 
 import com.spring.learn.model.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 

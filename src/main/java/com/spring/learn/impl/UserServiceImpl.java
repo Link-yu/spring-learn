@@ -11,13 +11,14 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
-@Repository
+@Service(value = "userService")
 public class UserServiceImpl implements UserService, Runnable {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired(required = false)

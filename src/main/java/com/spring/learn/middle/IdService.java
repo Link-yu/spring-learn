@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
  * @author 维斯
  */
 @LoadClass(value = "route")
+@Order(value = 1)
 public class IdService implements InitializingBean, CommandLineRunner, DisposableBean, ApplicationRunner {
     @Override
     public void destroy() throws Exception {
@@ -27,6 +29,8 @@ public class IdService implements InitializingBean, CommandLineRunner, Disposabl
     @Override
     public void run(String... args) throws Exception {
         System.out.println("CommandLineRunner!");
+        Thread.sleep(20000);
+        System.out.println("asdsga");
     }
 
     @Override
