@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.sql.DataSource;
 
@@ -21,7 +25,8 @@ import javax.sql.DataSource;
  * @author 维斯
  */
 @Configuration
-public class DataSourceConfig {
+@EnableTransactionManagement
+public class DataSourceConfig implements TransactionManagementConfigurer {
 
 //    @Bean(name = "primaryDataSourcePropeties")
 //    @Qualifier("primaryDataSourcePropeties")
@@ -48,6 +53,11 @@ public class DataSourceConfig {
     @Bean(value = "primaryTemplate")
     public JdbcTemplate primaryJdbcTemplate(@Qualifier(value = "primaryDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        return new DataSourceTransactionManager(primaryDataSource());
     }
 
 //    @Bean(value = "secondaryTemplate")

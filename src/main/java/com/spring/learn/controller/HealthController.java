@@ -17,6 +17,10 @@ public class HealthController {
     private CustomerEventPublisher customerEventPublisher;
     @Autowired(required = false)
     private ExecutorService executorService;
+
+    public HealthController() {
+        System.out.println("health!");
+    }
     @RequestMapping(value = "/health", method = RequestMethod.GET)
     public void sayHello() {
 //        customerEventPublisher.publish();

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.learn.Dao.LogMapper;
 import com.spring.learn.Dao.UserMapper;
 import com.spring.learn.impl.UserServiceImpl;
+import com.spring.learn.kafka.Producer;
 import com.spring.learn.listener.TestEvent;
 import com.spring.learn.model.Blog;
 import com.spring.learn.model.SysLog;
@@ -19,14 +20,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Date;
@@ -41,6 +41,7 @@ import java.util.concurrent.*;
 //@Api
 @RestController
 @RequestMapping(value = "/index")
+@AutoConfigureAfter(UserServiceImpl.class)
 public class HelloController {
     protected static final Logger logger = Logger.getLogger(HelloController.class);
     @Autowired
@@ -53,6 +54,23 @@ public class HelloController {
     ObjectMapper objectMapper;
     @Autowired
     private UserService userService;
+
+
+//    public HelloController() {
+//        System.out.println("hekk");
+//    }
+
+    private final Producer producer;
+
+    @Autowired
+    HelloController(Producer producer) {
+        this.producer = producer;
+    }
+
+    @RequestMapping(value = "/publish", method = RequestMethod.GET)
+    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
+        this.producer.sendMessage(message);
+    }
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public void sayHello(@RequestParam(required = true) String name) {
