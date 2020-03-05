@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:application name="demo-provider"/>
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-    <dubbo:protocol name="dubbo" port="20890" serialization="java" />
+    <dubbo:registry protocol="zookeeper" address="zookeeper://192.168.110.12:2181"/>
+    <dubbo:protocol name="dubbo" port="40078" serialization="java" />
     <dubbo:service interface="com.spring.learn.service.UserService" ref="userService" version="1.0.0"/>
 </beans>

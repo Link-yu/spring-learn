@@ -50,7 +50,7 @@ public class Handler implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        init();
-        onMessage();
+//        init();
+//        onMessage();
     }
 }

@@ -42,13 +42,13 @@ public class DataSourceConfig implements TransactionManagementConfigurer {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "secondaryDataSource")
-    @Qualifier("secondaryDataSource")
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.secondary")
-    public DataSource secondaryDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+//    @Bean(name = "secondaryDataSource")
+//    @Qualifier("secondaryDataSource")
+//    @Primary
+//    @ConfigurationProperties(prefix = "spring.datasource.secondary")
+//    public DataSource secondaryDataSource() {
+//        return DataSourceBuilder.create().build();
+//    }
 
     @Bean(value = "primaryTemplate")
     public JdbcTemplate primaryJdbcTemplate(@Qualifier(value = "primaryDataSource") DataSource dataSource) {

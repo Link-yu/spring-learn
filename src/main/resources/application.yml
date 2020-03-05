@@ -5,16 +5,16 @@ spring:
     primary:
       driver-class-name: com.mysql.jdbc.Driver
       username: root
-      password: 123456
-      jdbc-url: jdbc:mysql://localhost:53306/springbootdb?useUnicode=true&characterEncoding=utf8
-    secondary:
-      driver-class-name: com.mysql.jdbc.Driver
-      username: root
-      password: 123456
-      jdbc-url: jdbc:mysql://localhost:53306/springbootdb2?useUnicode=true&characterEncoding=utf8
+      password: pubtrans
+      jdbc-url: jdbc:mysql://192.168.110.12:3306/springbootdb?useUnicode=true&characterEncoding=utf8
+#    secondary:
+#      driver-class-name: com.mysql.jdbc.Driver
+#      username: root
+#      password: 123456
+#      jdbc-url: jdbc:mysql://localhost:53306/springbootdb2?useUnicode=true&characterEncoding=utf8
   data:
     mongodb:
-      url: mongodb://127.0.0.1:27017
+      url: mongodb://192.168.110.12:27017
       database: pubtrans
 
   kafka:

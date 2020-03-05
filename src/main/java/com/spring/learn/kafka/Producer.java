@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class Producer {
 
-    private static final String TOPIC = "users";
+    private static final String TOPIC = "STOP_SIGN_ROUTE_RELATION";
 
     @Autowired(required = false)
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message) {
         System.out.println(String.format("#### -> Producing message -> %s", message));
-        this.kafkaTemplate.send(TOPIC, message);
+        this.kafkaTemplate.send(TOPIC, "{\"action\":0,\"cubeId\":2,\"stopSignNo\":\"111111\",\"routeName\":\"1路\",\"routeId\":1000100001,\"stopName\":\"龙翔桥\",\"stopId\":1001000002,\"direction\":4,\"seqNo\":5,\"cityCode\":\"330100\",\"accountId\":11110,\"createTime\":\"2020-03-05T15:26:03.426\"}\n");
     }
 }
